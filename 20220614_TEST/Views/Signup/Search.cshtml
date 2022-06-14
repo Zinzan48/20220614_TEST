@@ -1,0 +1,83 @@
+﻿@model IEnumerable<_20220614_TEST.Models.SignDetail>
+
+@{
+    ViewData["Title"] = "Index";
+    var activy = ViewBag.Activy ?? new List<SelectListItem>();
+
+}
+
+<h1>活動項目(搜尋)</h1>
+
+<p>
+    @using (Html.BeginForm("Search", "Signup", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+
+            <div class="col-md-4">
+                <label class="text-primary col-md-2 col-form-label">名稱</label>
+                <input name="Name" class="form-control col-md-2" />
+            </div>
+            <div class=" col-md-4">
+                <label class="text-primary col-md-2 col-form-label">手機號碼</label>
+                <input name="Mobile" class="form-control  col-md-2" />
+            </div>
+            <div class="col-md-4">
+                <label class="text-danger col-md-2 col-form-label">活動項目</label>
+                <select class="form-control  col-md-2" name="itemID">
+                    <option value="">全部</option>
+                    @foreach (var item in activy)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-warning">搜尋</button>
+            </div>
+        </div>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.cMobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cCreateDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cItemData)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cMobile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cCreateDT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cItemData)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

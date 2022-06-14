@@ -1,0 +1,47 @@
+﻿@model IEnumerable<_20220614_TEST.Models.Sign>
+
+@{
+    ViewData["Title"] = "Index";
+
+    var result = ViewBag.Result ?? string.Empty;
+}
+
+<h1>活動項目</h1>
+<a class="nav-link text-dark" asp-area="" asp-controller="Signup" asp-action="Search">搜尋</a>
+@if (!string.IsNullOrEmpty(result))
+{
+    <p>@result</p>
+
+}
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.cItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cItemNum)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cItemNum)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.cItemID">詳細資料</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

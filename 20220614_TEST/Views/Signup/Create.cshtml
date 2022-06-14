@@ -1,0 +1,67 @@
+﻿@model _20220614_TEST.Models.SignDetail
+
+@{
+    ViewData["Title"] = "Create";
+    var activy = ViewBag.Activy ?? new List<SelectListItem>();
+    var error = ViewBag.Error ?? string.Empty;
+}
+
+<h1>Create</h1>
+
+<h4>tblSignup</h4>
+<hr />
+@if (!string.IsNullOrEmpty(error))
+{
+    <p class="text-danger">@error</p>
+}
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="cMobile" class="control-label"></label>
+                <input asp-for="cMobile" class="form-control" />
+                <span asp-validation-for="cMobile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cName" class="control-label"></label>
+                <input asp-for="cName" class="form-control" />
+                <span asp-validation-for="cName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cEmail" class="control-label"></label>
+                <input asp-for="cEmail" class="form-control" />
+                <span asp-validation-for="cEmail" class="text-danger"></span>
+            </div>
+            @*            <div class="form-group">
+            <label asp-for="cCreateDT" class="control-label"></label>
+            <input asp-for="cCreateDT" class="form-control" />
+            <span asp-validation-for="cCreateDT" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+
+                <label asp-for="cItemID" class="control-label"></label>
+                <select class="form-control  col-md-2" name="cItemID">
+                    @foreach (var item in activy)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+                <span asp-validation-for="cItemID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

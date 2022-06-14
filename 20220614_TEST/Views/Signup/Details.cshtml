@@ -1,0 +1,67 @@
+﻿@model IEnumerable<_20220614_TEST.Models.tblSignup>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>報名人員</h1>
+
+<div>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.cName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.cEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.cCreateDT)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cCreateDT)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.cMobile">編輯</a>
+                        <a class="link-but-blue" onclick="Delete('@item.cMobile')"> <i class="far fa-trash-alt"></i>刪除</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+    function Delete(id) {
+        if (confirm('確認刪除？')) {
+            $.ajax({
+                method: "post",
+                url: "@Url.Action("Delete", "Signup")",
+                headers: {
+                },
+                data: { 'id': id },
+                success: function(data) {
+                    window.location = '@Url.Action("Detail", "Signup")';
+                },
+                error: function(error) {
+                    alert(error.responseText);
+                }
+            });
+        }
+    }
+</script>
+
